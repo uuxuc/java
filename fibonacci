@@ -1,0 +1,19 @@
+import java.util.HashMap;
+public class FibonacciDP {
+    private static HashMap<Integer, Integer> memo = new HashMap<>();
+    public static int fib(int n) {
+        if (n <= 1) {
+            return n; // Base case
+        }
+        if (memo.containsKey(n)) {
+            return memo.get(n); // Return the memoized result
+        }
+        int result = fib(n - 1) + fib(n - 2);
+        memo.put(n, result); // Store the result in memo
+        return result;
+    }
+    public static void main(String[] args) {
+        int n = 10;
+        System.out.println("Fibonacci of " + n + ": " + fib(n));
+    }
+}
