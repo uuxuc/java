@@ -1,0 +1,46 @@
+class Node {
+    int data;
+    Node left, right;
+    Node(int item) {
+        data = item;
+        left = right = null;
+    }
+}
+public class DFSBinaryTree {
+    Node root;
+    void dfsPreorder(Node node) {
+        if (node == null)
+            return;
+        System.out.print(node.data + " ");
+        dfsPreorder(node.left);
+        dfsPreorder(node.right);
+    }
+    void dfsInorder(Node node) {
+        if (node == null)
+            return;
+        dfsInorder(node.left);
+        System.out.print(node.data + " ");
+        dfsInorder(node.right);
+    }
+    void dfsPostorder(Node node) {
+        if (node == null)
+            return;
+        dfsPostorder(node.left);
+        dfsPostorder(node.right);
+        System.out.print(node.data + " ");
+    }
+    public static void main(String[] args) {
+        DFSBinaryTree tree = new DFSBinaryTree(); 
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.left.left = new Node(4);
+        tree.root.left.right = new Node(5);
+        System.out.println("DFS Preorder:");
+        tree.dfsPreorder(tree.root); 
+        System.out.println("\nDFS Inorder:");
+        tree.dfsInorder(tree.root);   
+        System.out.println("\nDFS Postorder:");
+        tree.dfsPostorder(tree.root); 
+    }
+}
