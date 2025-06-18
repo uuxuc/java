@@ -1,0 +1,79 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+public class Phonebook {
+    private Map<String, String> contacts = new HashMap<>();
+    public void addContact(String name, String phoneNumber) {
+        contacts.put(name, phoneNumber);
+        System.out.println("Contact added: " + name + " - " + phoneNumber);
+    }
+    public void searchContact(String name) {
+        if (contacts.containsKey(name)) {
+            System.out.println("Contact found: " + name + " - " + contacts.get(name));
+        } else {
+            System.out.println("Contact not found.");
+        }
+    }
+    public void displayContacts() {
+        if (contacts.isEmpty()) {
+            System.out.println("Phonebook is empty.");
+        } else {
+            System.out.println("Phonebook contacts:");
+            for (Map.Entry<String, String> entry : contacts.entrySet()) {
+                System.out.println(entry.getKey() + " - " + entry.getValue());
+            }
+        }
+    }
+    public void deleteContact(String name) {
+        if (contacts.containsKey(name)) {
+            contacts.remove(name);
+            System.out.println("Contact deleted: " + name);
+        } else {
+            System.out.println("Contact not found.");
+        }
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Phonebook phonebook = new Phonebook();
+        int choice;
+        do {
+            System.out.println("\nPhonebook Menu:");
+            System.out.println("1. Add Contact");
+            System.out.println("2. Search Contact");
+            System.out.println("3. Display All Contacts");
+            System.out.println("4. Delete Contact");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();  // Consume the newline character
+            switch (choice) {
+                case 1: 
+                    System.out.print("Enter contact name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter phone number: ");
+                    String phoneNumber = scanner.nextLine();
+                    phonebook.addContact(name, phoneNumber);
+                    break;
+                case 2:
+                    System.out.print("Enter contact name to search: ");
+                    String searchName = scanner.nextLine();
+                    phonebook.searchContact(searchName);
+                    break;
+                case 3:
+                    phonebook.displayContacts();
+                    break;
+                case 4:
+                    System.out.print("Enter contact name to delete: ");
+                    String deleteName = scanner.nextLine();
+                    phonebook.deleteContact(deleteName);
+                    break;
+                case 5: 
+                    System.out.println("Exiting Phonebook...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 5);
+        scanner.close();
+    }
+}
